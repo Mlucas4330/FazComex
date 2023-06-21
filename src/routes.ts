@@ -2,12 +2,11 @@ import { Router } from 'express';
 import { MercadoriaController } from './controllers/MercadoriaController';
 
 const routes = Router();
-const MercadoriaController_ = new MercadoriaController();
 
-routes.get('/orderby/enquadramento', MercadoriaController_.orderByEnquadramento);
-routes.get('/sum/local-embarque', MercadoriaController_.sumLocalEmbarque);
-routes.get('/sum/condicao-venda', MercadoriaController_.sumCondicaoVenda);
-routes.get('/groupby', MercadoriaController_.groupBy);
-routes.get('/distinct', MercadoriaController_.distinctNCM);
+routes.get('/orderby/enquadramento', new MercadoriaController().orderByEnquadramento);
+routes.get('/sum/local-embarque', new MercadoriaController().sumLocalEmbarque);
+routes.get('/sum/condicao-venda', new MercadoriaController().sumCondicaoVenda);
+routes.get('/groupby', new MercadoriaController().groupBy);
+routes.get('/distinct', new MercadoriaController().distinctNCM);
 
 export default routes;

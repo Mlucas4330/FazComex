@@ -1,39 +1,81 @@
 import { Request, Response } from 'express';
-import { IMercadoriaRepository } from '../repositories/Interfaces/IMercadoriaRepository';
-import { IMercadoriaService } from '../services/Interfaces/IMercadoriaService';
 import { MercadoriaRepository } from '../repositories/MercadoriaRepository';
 import { MercadoriaService } from '../services/MercadoriaService';
 
 export class MercadoriaController {
-    private mercadoriaRepository: IMercadoriaRepository;
-    private mercadoriaService: IMercadoriaService;
-
-    constructor() {
-        this.mercadoriaRepository = new MercadoriaRepository();
-        this.mercadoriaService = new MercadoriaService();
-    }
     orderByEnquadramento(req: Request, res: Response) {
-        const due_itens = this.mercadoriaRepository.findAll();
-        res.send(this.mercadoriaService.orderby(due_itens, 'enquadramento1'));
+        try {
+            const due_itens = new MercadoriaRepository().findAll();
+            const value = new MercadoriaService().orderby(due_itens, 'enquadramento1');
+            res.send({
+                message: 'ok',
+                value
+            });
+        } catch (error: any) {
+            res.status(500).send({
+                message: error
+            });
+        }
     }
 
     sumLocalEmbarque(req: Request, res: Response) {
-        const due_itens = this.mercadoriaRepository.findAll();
-        res.send(this.mercadoriaService.sum(due_itens, 'valor_merc_local_embarque'));
+        try {
+            const due_itens = new MercadoriaRepository().findAll();
+            const value = new MercadoriaService().sum(due_itens, 'valor_merc_local_embarque');
+            res.send({
+                message: 'ok',
+                value
+            });
+        } catch (error: any) {
+            res.status(500).send({
+                message: error
+            });
+        }
     }
 
     sumCondicaoVenda(req: Request, res: Response) {
-        const due_itens = this.mercadoriaRepository.findAll();
-        res.send(this.mercadoriaService.sum(due_itens, 'valor_merc_condicao_venda'));
+        try {
+            const due_itens = new MercadoriaRepository().findAll();
+            const value = new MercadoriaService().sum(due_itens, 'valor_merc_condicao_venda');
+
+            res.send({
+                message: 'ok',
+                value
+            });
+        } catch (error: any) {
+            res.status(500).send({
+                message: error
+            });
+        }
     }
 
     groupBy(req: Request, res: Response) {
-        const due_itens = this.mercadoriaRepository.findAll();
-        res.send(this.mercadoriaService.groupby(due_itens));
+        try {
+            const due_itens = new MercadoriaRepository().findAll();
+            const value = new MercadoriaService().groupby(due_itens);
+            res.send({
+                message: 'ok',
+                value
+            });
+        } catch (error: any) {
+            res.status(500).send({
+                message: error
+            });
+        }
     }
 
     distinctNCM(req: Request, res: Response) {
-        const due_itens = this.mercadoriaRepository.findAll();
-        res.send(this.mercadoriaService.distinct(due_itens, 'ncm'));
+        try {
+            const due_itens = new MercadoriaRepository().findAll();
+            const value = new MercadoriaService().distinct(due_itens, 'ncm');
+            res.send({
+                message: 'ok',
+                value
+            });
+        } catch (error: any) {
+            res.status(500).send({
+                message: error
+            });
+        }
     }
 }

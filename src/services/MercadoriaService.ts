@@ -1,7 +1,6 @@
 import { Mercadoria } from '../models/interfaces/Mercadoria';
-import { IMercadoriaService } from './Interfaces/IMercadoriaService';
 
-export class MercadoriaService implements IMercadoriaService {
+export class MercadoriaService {
     orderby(data: Mercadoria[], prop: string) {
         return data.sort((a: Mercadoria, b: Mercadoria) => {
             return parseInt(a[prop]) - parseInt(b[prop]);
@@ -9,9 +8,11 @@ export class MercadoriaService implements IMercadoriaService {
     }
 
     sum(data: Mercadoria[], prop: string) {
-        return data.reduce((acc, curr) => {
+        const sum = data.reduce((acc, curr) => {
             return acc + curr[prop];
         }, 0);
+
+        return { [prop]: sum }
     }
 
     groupby(data: Mercadoria[]) {
